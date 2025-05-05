@@ -1,0 +1,11 @@
+CACHE MANIFEST
+
+# Cache v1.0 – SALMXD
+
+CACHE:
+README.md
+index.html
+cache.html
+
+NETWORK:
+*
