@@ -2,27 +2,39 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>لعبة SALMXD - مكتبة الألعاب</title>
+  <title>مكتبة ألعاب SALMXD</title>
   <style>
-    body { font-family: Arial; background: #f2f2f2; text-align: center; direction: rtl; }
-    .game { margin: 50px auto; background: #fff; border: 1px solid #ccc; padding: 20px; width: 350px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    img { width: 100%; height: auto; max-height: 200px; object-fit: cover; }
-    button { margin-top: 15px; padding: 12px 20px; background: #2196F3; color: white; border: none; cursor: pointer; font-size: 16px; }
-    h1 { color: #333; }
+    body { font-family: sans-serif; direction: rtl; background: #f5f5f5; text-align: center; }
+    .game { background: white; padding: 20px; margin: 20px auto; width: 300px; box-shadow: 0 0 10px #ccc; }
+    img { width: 100%; height: auto; }
+    button { margin-top: 10px; padding: 10px; font-size: 16px; background: #2196F3; color: white; border: none; cursor: pointer; }
   </style>
 </head>
 <body>
-  <h1>مكتبة ألعاب SALMXD</h1>
+  <h1>مكتبة SALMXD للألعاب</h1>
+  <div id="games"></div>
 
-  <div class="game">
-    <h2>SALMXD</h2>
-    <img src="https://i.imgur.com/jNNT4LE.jpeg" alt="غلاف اللعبة">
-    <p>الإصدار: 1.00</p>
-    <p>المنطقة: USA</p>
-    <p>الحجم: 34.5 جيجا (تقريبي)</p>
-    <button onclick="window.location.href='https://akirabox.com/download/eyJpdiI6IkFuOFFTMTQrTEtiY3B5TDNlY3BRS3c9PSIsInZhbHVlIjoiVnl5dm96dnMxNWNyeFIyRWRnZ1lMUWpNaGtmcVkzS2hZZ0pwY2tUU3FCOD0iLCJtYWMiOiI2Nzc3MzYxNjk1MzAwYmEzN2Y0ODc5M2YxNjY2NTVhYWY0ZDZlMWZkNjY0MTAzMjVjMTUwNjNhOTE2YWQ5MTMwIiwidGFnIjoiIn0=/EP0908-CUSA03744_00-A0100-V0100-%5BDLPSGAME.COM%5D.pkg?expiration=1746570746&signature=cb09d6360c033f340b71c27f68e981bd2c82fffc43c13acc2caf68f72277d394'">
-      تحميل اللعبة
-    </button>
-  </div>
+  <script>
+    fetch('games.json')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('games');
+        const games = data.DATA;
+
+        for (const link in games) {
+          const game = games[link];
+          const div = document.createElement('div');
+          div.className = 'game';
+          div.innerHTML = `
+            <img src="${game.cover_url}" alt="غلاف اللعبة">
+            <h3>${game.name}</h3>
+            <p>الإصدار: ${game.version} | الحجم: ${(game.size / 1e9).toFixed(1)} GB</p>
+            <p>تاريخ الإصدار: ${game.release}</p>
+            <button onclick="window.location.href='${link}'">تحميل اللعبة</button>
+          `;
+          container.appendChild(div);
+        }
+      });
+  </script>
 </body>
 </html>
