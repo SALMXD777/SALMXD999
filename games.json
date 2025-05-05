@@ -1,0 +1,13 @@
+{
+  "DATA": {
+    "https://akirabox.com/download/your_real_pkg_link.pkg": {
+      "region": "USA",
+      "name": "SALMXD Game",
+      "version": "1.00",
+      "release": "05-06-2025",
+      "size": 34500000000,
+      "min_fw": null,
+      "cover_url": "https://example.com/cover.png"
+    }
+  }
+}
